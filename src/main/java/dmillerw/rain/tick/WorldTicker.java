@@ -3,6 +3,7 @@ package dmillerw.rain.tick;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import dmillerw.rain.TooMuchRain;
+import dmillerw.rain.util.NumberUtil;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.common.config.Configuration;
@@ -51,6 +52,11 @@ public class WorldTicker {
 	 */
 
 	/**
+	 * Stores the tick value for the last world tick, so we can see if a command was used
+	 */
+	private int lastRainTick = 0;
+
+	/**
 	 * Stores the rain enabled value for the last tick, so we can see if something changed
 	 */
 	private boolean lastRainState = false;
@@ -63,11 +69,14 @@ public class WorldTicker {
 
 			if (!world.provider.hasNoSky) {
 				ConfigWrapper config = TooMuchRain.settingMap.get(world.provider.dimensionId);
+				int rainTick = info.getRainTime();
 				boolean rainState = info.isRaining();
 
-				System.out.println(rainState + " " + info.getRainTime());
-
 				/* DO CALC */
+
+				System.out.println(info.getRainTime() + " " + lastRainTick + " = " + NumberUtil.inRange(lastRainTick, 10, rainTick));
+
+				lastRainTick = rainTick;
 
 				if (rainState != lastRainState) {
 					// Ticks have expired, so recalculate
