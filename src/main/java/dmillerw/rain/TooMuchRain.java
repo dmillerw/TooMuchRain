@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * @author dmillerw
  */
-@Mod(modid="omg-rain", name="TooMuchRain", version="1.0.0")
+@Mod(modid="TooMuchRain", name="TooMuchRain", version="%VERSION%", dependencies="required-after:Forge@[%FORGE_VERSION%,);")
 public class TooMuchRain {
 
 	public static Map<Integer, WorldTicker.ConfigWrapper> settingMap = Maps.newHashMap();
