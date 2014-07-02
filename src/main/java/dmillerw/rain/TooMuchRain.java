@@ -1,6 +1,5 @@
 package dmillerw.rain;
 
-import com.google.common.collect.Maps;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -9,7 +8,6 @@ import dmillerw.rain.tick.WorldTicker;
 import net.minecraftforge.common.config.Configuration;
 
 import java.io.File;
-import java.util.Map;
 
 /**
  * @author dmillerw
@@ -17,7 +15,7 @@ import java.util.Map;
 @Mod(modid="TooMuchRain", name="TooMuchRain", version="%VERSION%", dependencies="required-after:Forge@[%FORGE_VERSION%,);")
 public class TooMuchRain {
 
-	public static Map<Integer, WorldTicker.ConfigWrapper> settingMap = Maps.newHashMap();
+	public static WorldTicker.ConfigWrapper settings;
 
 	public static File config;
 
@@ -31,13 +29,7 @@ public class TooMuchRain {
 		Configuration configuration = new Configuration(config);
 		configuration.load();
 
-//		for (int dimension : DimensionManager.getIDs()) {
-//			WorldServer world = DimensionManager.getWorld(dimension);
-//
-//			if (!world.provider.hasNoSky) {
-				settingMap.put(0, new WorldTicker.ConfigWrapper().fromConfig(configuration, 0));
-//			}
-//		}
+		settings = new WorldTicker.ConfigWrapper().fromConfig(configuration);
 
 		if (configuration.hasChanged()) {
 			configuration.save();
@@ -45,5 +37,4 @@ public class TooMuchRain {
 
 		FMLCommonHandler.instance().bus().register(new WorldTicker());
 	}
-
 }
