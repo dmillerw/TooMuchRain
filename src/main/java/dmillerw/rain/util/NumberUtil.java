@@ -5,8 +5,7 @@ package dmillerw.rain.util;
  */
 public class NumberUtil {
 
-	public static boolean inRange(int base, int check, int value) {
-		return (base >= value || base <= value + check);
+	public static boolean inRange(int num1, int num2, int range) {
+		return Math.abs(num2 - num1) <= range;
 	}
-
 }

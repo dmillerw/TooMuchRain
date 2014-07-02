@@ -72,24 +72,29 @@ public class WorldTicker {
 				int rainTick = info.getRainTime();
 				boolean rainState = info.isRaining();
 
-				/* DO CALC */
-
-				System.out.println(info.getRainTime() + " " + lastRainTick + " = " + NumberUtil.inRange(lastRainTick, 10, rainTick));
+				if (lastRainTick != 0 && !NumberUtil.inRange(lastRainTick, rainTick, 10)) {
+					// A weather command was probably run, so we warn ops and recalculate ticks
+//					NotifyUtil.notifyOPs("Do not use the /weather command! It interferes with TooMuchRain!");
+//					NotifyUtil.notifyOPs("Recalculating...");
+					recalculateTicks(info, config);
+				}
 
 				lastRainTick = rainTick;
 
 				if (rainState != lastRainState) {
 					// Ticks have expired, so recalculate
-					if (!info.isRaining()) {
-						info.setRainTime(random.nextInt(config.rainBreakModulator) + config.rainBreakConstant);
-					} else {
-						info.setRainTime(random.nextInt(config.rainDurationModulator) + config.rainDurationConstant);
-					}
-
+					recalculateTicks(info, config);
 					lastRainState = rainState;
 				}
 			}
 		}
 	}
 
+	private void recalculateTicks(WorldInfo info, ConfigWrapper config) {
+		if (!info.isRaining()) {
+			info.setRainTime(random.nextInt(config.rainBreakModulator + 1) + config.rainBreakConstant);
+		} else {
+			info.setRainTime(random.nextInt(config.rainDurationModulator + 1) + config.rainDurationConstant);
+		}
+	}
 }
