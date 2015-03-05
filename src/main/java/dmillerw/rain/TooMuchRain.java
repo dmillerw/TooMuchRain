@@ -12,7 +12,7 @@ import java.io.File;
 /**
  * @author dmillerw
  */
-@Mod(modid="TooMuchRain", name="TooMuchRain", version="%VERSION%", dependencies="required-after:Forge@[%FORGE_VERSION%,);")
+@Mod(modid="TooMuchRain", name="TooMuchRain", version="%MOD_VERSION%", dependencies="required-after:Forge@[%FORGE_VERSION%,)", acceptableRemoteVersions = "*")
 public class TooMuchRain {
 
 	public static WorldTicker.ConfigWrapper settings;

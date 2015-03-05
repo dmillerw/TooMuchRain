@@ -1,0 +1,18 @@
+[
+{
+  "modid": "${modid}",
+  "name": "TooMuchRain",
+  "description": "Gives players more control over Minecraft weather patterns through an easy to use config file.",
+  "version": "${mod_version}",
+  "mcversion": "${minecraft_version}",
+  "url": "http://minecraft.curseforge.com/mc-mods/221982-toomuchrain",
+  "updateUrl": "",
+  "authorList": ["dmillerw"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": [
+      "MinecraftForge"
+  ]
+}
+]
