@@ -107,7 +107,7 @@ public class WorldTicker {
 			recalculateRainTicks(info, config);
 		}
 
-		lastRainTick = rainTick;
+		lastRainTick = info.getRainTime();
 
 		if (rainState != lastRainState) {
 			// Ticks have expired, so recalculate
@@ -117,15 +117,15 @@ public class WorldTicker {
 	}
 
 	private void tickThunder(WorldInfo info, ConfigWrapper config) {
-		int thunderTick = info.getRainTime();
-		boolean thunderState = info.isRaining();
+		int thunderTick = info.getThunderTime();
+		boolean thunderState = info.isThundering();
 
 		if (lastThunderTick != 0 && !NumberUtil.inRange(lastThunderTick, thunderTick, 10)) {
 			// Someone forcibly changed the tick timing. Recalculate
 			recalculateThunderTicks(info, config);
 		}
 
-		lastThunderTick = thunderTick;
+		lastThunderTick = info.getThunderTime();
 
 		if (thunderState != lastThunderState) {
 			// Ticks have expired, so recalculate
