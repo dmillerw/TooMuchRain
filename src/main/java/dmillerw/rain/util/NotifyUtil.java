@@ -14,10 +14,11 @@ public class NotifyUtil {
 		ServerConfigurationManager configurationManager = MinecraftServer.getServer().getConfigurationManager();
 
 		if (configurationManager != null) {
-			for (Object obj : configurationManager.getOps()) {
+			for (Object obj : configurationManager.playerEntityList) {
 				EntityPlayer player = (EntityPlayer) obj;
-
-				player.addChatComponentMessage(new ChatComponentText(message));
+				if (configurationManager.func_152596_g(player.getGameProfile())) {
+					player.addChatComponentMessage(new ChatComponentText(message));
+				}
 			}
 		}
 	}
