@@ -1,12 +1,12 @@
 package dmillerw.rain.tick;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
 import dmillerw.rain.TooMuchRain;
 import dmillerw.rain.util.NumberUtil;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.Random;
 
@@ -91,7 +91,7 @@ public class WorldTicker {
 			WorldServer world = (WorldServer) event.world;
 			WorldInfo info = world.getWorldInfo();
 
-			if (!world.provider.hasNoSky) {
+			if (!world.provider.getHasNoSky()) {
 				tickRain(info, TooMuchRain.settings);
 				tickThunder(info, TooMuchRain.settings);
 			}
